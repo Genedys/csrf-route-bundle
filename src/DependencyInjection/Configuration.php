@@ -15,8 +15,10 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('genedys_csrf_route');
+        $treeBuilder = new TreeBuilder('genedys_csrf_route');
+        $rootNode = method_exists(TreeBuilder::class, 'getRootNode')
+            ? $treeBuilder->getRootNode()
+            : $treeBuilder->root('genedys_csrf_route');
 
         $rootNode
             ->children()
